@@ -5,53 +5,68 @@ import "./globals.scss";
 
 export const metadata: Metadata = {
   title: {
-    default: "Age Calculator - Calculate Your Exact Age",
-    template: "%s | Age Calculator"
+    default: "Age Calculator & Health Hub - Precise Age, BMI & Diet Plans",
+    template: "%s | Age Calculator & Health Hub"
   },
-  description: "Calculate your exact age in years, months, days, hours, minutes, and seconds with our beautiful and precise age calculator.",
+  description: "Calculate your exact age in years, months, days, hours, minutes & seconds. Get personalized BMI analysis, custom diet plans, and expert health tips. Free online health calculator with PDF reports.",
   keywords: [
     "age calculator",
-    "calculate age",
+    "exact age calculator",
+    "BMI calculator",
+    "diet plans",
+    "health tips",
     "age in days",
     "age in hours",
     "age in minutes",
+    "age in seconds",
+    "health calculator",
+    "nutrition calculator",
+    "weight management",
+    "health assessment",
+    "personalized diet",
+    "BMI analysis",
+    "health recommendations",
     "birthday calculator",
-    "exact age",
-    "age counter",
-    "time calculator"
+    "time calculator",
+    "health tools",
+    "wellness calculator",
+    "fitness calculator",
+    "meal plans",
+    "nutrition facts",
+    "health report PDF"
   ],
-  authors: [{ name: "Age Calculator" }],
-  creator: "Age Calculator",
-  publisher: "Age Calculator",
+  authors: [{ name: "Age Calculator & Health Hub" }],
+  creator: "Age Calculator & Health Hub",
+  publisher: "Age Calculator & Health Hub",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://age-calculator.vercel.app'),
+  metadataBase: new URL('https://age-health-calculator.vercel.app'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: "Age Calculator - Calculate Your Exact Age",
-    description: "Calculate your exact age in years, months, days, hours, minutes, and seconds with our beautiful and precise age calculator.",
-    url: 'https://age-calculator.vercel.app',
-    siteName: 'Age Calculator',
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://age-health-calculator.vercel.app',
+    title: 'Age Calculator & Health Hub - Precise Age, BMI & Diet Plans',
+    description: 'Calculate your exact age in years, months, days, hours, minutes & seconds. Get personalized BMI analysis, custom diet plans, and expert health tips.',
+    siteName: 'Age Calculator & Health Hub',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Age Calculator - Calculate Your Exact Age',
+        alt: 'Age Calculator & Health Hub - Calculate Age, BMI, Get Diet Plans',
       },
     ],
-    locale: 'en_US',
-    type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Age Calculator - Calculate Your Exact Age",
-    description: "Calculate your exact age in years, months, days, hours, minutes, and seconds with our beautiful and precise age calculator.",
+    title: 'Age Calculator & Health Hub - Precise Age, BMI & Diet Plans',
+    description: 'Calculate your exact age in years, months, days, hours, minutes & seconds. Get personalized BMI analysis, custom diet plans, and expert health tips.',
     images: ['/og-image.png'],
     creator: '@agecalculator',
   },
@@ -81,25 +96,35 @@ export default function RootLayout({
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "Age Calculator",
-    "description": "Calculate your exact age in years, months, days, hours, minutes, and seconds with our beautiful and precise age calculator.",
-    "url": "https://age-calculator.vercel.app",
-    "applicationCategory": "UtilityApplication",
+    "name": "Age Calculator & Health Hub",
+    "description": "Calculate your exact age in years, months, days, hours, minutes & seconds. Get personalized BMI analysis, custom diet plans, and expert health tips. Free online health calculator with PDF reports.",
+    "url": "https://age-health-calculator.vercel.app",
+    "applicationCategory": "HealthApplication",
     "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript. Requires HTML5.",
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
     },
+    "featureList": [
+      "Age Calculator",
+      "BMI Calculator",
+      "Diet Plans",
+      "Health Tips",
+      "PDF Reports",
+      "Dark Mode",
+      "Responsive Design"
+    ],
     "author": {
       "@type": "Organization",
-      "name": "Age Calculator"
+      "name": "Age Calculator & Health Hub"
     },
     "datePublished": "2024-01-01",
     "dateModified": new Date().toISOString().split('T')[0],
     "inLanguage": "en-US",
     "isAccessibleForFree": true,
-    "keywords": "age calculator, calculate age, age in days, age in hours, age in minutes, birthday calculator, exact age, time calculator"
+    "keywords": "age calculator, BMI calculator, diet plans, health tips, calculate age, age in days, age in hours, age in minutes, birthday calculator, exact age, time calculator, health tools, wellness calculator"
   };
 
   return (
@@ -115,12 +140,19 @@ export default function RootLayout({
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="manifest" href="/manifest.json" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet" />
         <meta name="theme-color" content="#6366f1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Age Health Calculator" />
+        <meta name="application-name" content="Age Health Calculator" />
+        <meta name="msapplication-TileColor" content="#6366f1" />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
       </head>
       <body>
         <ThemeProvider>
