@@ -15,13 +15,13 @@ const Navigation: React.FC = () => {
           <div className="navigation__brand-logo">
             <Image
               src="/flower.png"
-              alt="Age Calculator Logo"
+              alt="Age & Health Calculator Logo"
               width={45}
               height={45}
               className="navigation__brand-flower"
             />
           </div>
-          <span className="navigation__brand-text">Age Calculator</span>
+          <span className="navigation__brand-text">A&H Calculator</span>
         </Link>
 
         {/* Theme Toggle */}

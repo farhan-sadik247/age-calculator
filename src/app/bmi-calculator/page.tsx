@@ -94,7 +94,7 @@ export default function BMICalculatorPage() {
                 BMI Calculator
               </h1>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Calculate your Body Mass Index with metric or imperial units. Get instant health category classification, personalized recommendations, and downloadable PDF reports.
+                Calculate your Body Mass Index and understand your health status
               </p>
             </div>
           </div>

@@ -49,11 +49,17 @@
     @include flex-between;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 $spacing-4;
-    height: 70px;
+    padding: 0 $spacing-2; // Smaller padding for mobile
+    height: 60px; // Slightly smaller height for mobile
+
+    @media (min-width: 480px) {
+      padding: 0 $spacing-3;
+      height: 65px;
+    }
 
     @include respond-to(md) {
       padding: 0 $spacing-6;
+      height: 70px;
     }
   }
 
@@ -80,10 +86,10 @@
       .navigation__brand-text {
         animation: float 2s ease-in-out infinite;
         transform: scale(1.05);
-        color: transparent;
+        color: transparent !important; // Force transparency for gradient effect
 
         &::before {
-          opacity: 1;
+          opacity: 1 !important;
           animation: gradientShift 1.5s ease-in-out infinite;
         }
 
@@ -117,9 +123,9 @@
   &__brand-text {
     font-family: 'Dancing Script', 'Brush Script MT', cursive;
     font-weight: 700;
-    font-size: 24px;
-    letter-spacing: 1px;
-    margin-left: $spacing-3;
+    font-size: 18px; // Smaller base size for mobile
+    letter-spacing: 0.5px;
+    margin-left: $spacing-2;
     color: $gray-800;
     transition: all $transition-base;
     position: relative;
@@ -127,14 +133,39 @@
       1px 1px 2px rgba(255, 255, 255, 0.8),
       0 0 10px rgba(255, 107, 107, 0.3);
 
+    // Mobile specific styling
+    @media (max-width: 480px) {
+      font-size: 16px;
+      letter-spacing: 0.25px;
+      margin-left: $spacing-1;
+    }
+
+    // Very small screens
+    @media (max-width: 360px) {
+      font-size: 14px;
+      letter-spacing: 0px;
+    }
+
+    @include respond-to(sm) {
+      font-size: 20px;
+      letter-spacing: 0.75px;
+      margin-left: $spacing-2;
+    }
+
     @include respond-to(md) {
+      font-size: 24px;
+      letter-spacing: 1px;
+      margin-left: $spacing-3;
+    }
+
+    @include respond-to(lg) {
       font-size: 28px;
       letter-spacing: 1.5px;
     }
 
     // Beautiful gradient overlay that appears on hover
     &::before {
-      content: 'Age Calculator';
+      content: 'A&H Calculator';
       position: absolute;
       top: 0;
       left: 0;
@@ -146,6 +177,7 @@
       animation: gradientShift 4s ease-in-out infinite;
       opacity: 0;
       transition: opacity $transition-base;
+      z-index: 1; // Ensure it's above the original text
     }
 
     // Subtle glow effect
@@ -165,8 +197,18 @@
       transition: opacity $transition-base;
     }
 
-    @media (max-width: $breakpoint-sm - 1px) {
-      display: none;
+    @media (max-width: 320px) {
+      font-size: 0.875rem; // 14px for very small screens
+    }
+
+    // Light mode hover fix
+    &:hover {
+      color: transparent !important;
+
+      &::before {
+        opacity: 1 !important;
+        z-index: 2;
+      }
     }
 
     // Dark mode text color
@@ -176,6 +218,14 @@
       &::before {
         // Keep the gradient overlay for dark mode too
         opacity: 0.8;
+      }
+
+      &:hover {
+        color: transparent !important;
+
+        &::before {
+          opacity: 1 !important;
+        }
       }
     }
   }

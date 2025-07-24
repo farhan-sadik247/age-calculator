@@ -367,12 +367,44 @@ button {
   }
 }
 
+// Mobile-specific fixes for header text
+@media (max-width: 480px) {
+  h1.text-gradient {
+    // Ensure text is visible on mobile
+    line-height: 1.2;
+    word-break: break-word;
+    hyphens: auto;
+
+    // Force minimum font size for readability
+    font-size: 1.875rem !important; // 30px
+
+    // Ensure proper spacing
+    margin-bottom: 1rem;
+    padding: 0 0.5rem;
+  }
+}
+
 .text-center {
   text-align: center;
 }
 
 .text-gradient {
   @include text-gradient;
+
+  // Ensure text is visible on mobile devices
+  @media (max-width: 480px) {
+    // Fallback for mobile devices that might have issues with text gradients
+    background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    // Fallback color if gradient fails
+    @supports not (-webkit-background-clip: text) {
+      color: $primary-color;
+      background: none;
+    }
+  }
 }
 
 .sr-only {

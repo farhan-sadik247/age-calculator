@@ -1,7 +1,7 @@
 {
-  "name": "Age Calculator - Calculate Your Exact Age",
-  "short_name": "Age Calculator",
-  "description": "Calculate your exact age in years, months, days, hours, minutes, and seconds. Discover your zodiac sign, Chinese zodiac, and upcoming milestones.",
+  "name": "Age & Health Calculator",
+  "short_name": "Age & Health Calc",
+  "description": "Calculate your exact age in years, months, days, hours, minutes & seconds. Get personalized BMI analysis, custom diet plans, and expert health tips.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f9fafb",
@@ -9,7 +9,7 @@
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "en-US",
-  "categories": ["utilities", "lifestyle"],
+  "categories": ["health", "utilities", "lifestyle"],
   "icons": [
     {
       "src": "/android-chrome-192x192.png",

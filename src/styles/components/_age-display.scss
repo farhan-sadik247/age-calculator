@@ -1,7 +1,15 @@
 .age-display {
   max-width: 800px;
   margin: 0 auto;
-  padding: $spacing-6;
+  padding: $spacing-3; // Smaller padding for mobile
+
+  @media (min-width: 480px) {
+    padding: $spacing-4;
+  }
+
+  @include respond-to(md) {
+    padding: $spacing-6;
+  }
 
   &--loading {
     @include flex-column-center;
@@ -88,10 +96,19 @@
 
   &__breakdown-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: $spacing-4;
+    grid-template-columns: 1fr; // Single column on mobile
+    gap: $spacing-2; // Smaller gap on mobile
+
+    @media (min-width: 480px) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: $spacing-3;
+    }
 
     @include respond-to(md) {
+      gap: $spacing-4;
+    }
+
+    @include respond-to(lg) {
       gap: $spacing-6;
     }
   }
@@ -99,9 +116,17 @@
   &__stat {
     @include card-hover;
     text-align: center;
-    padding: $spacing-6;
+    padding: $spacing-3; // Smaller padding for mobile
     background: linear-gradient(135deg, $white 0%, $gray-50 100%);
     border: 1px solid $gray-200;
+
+    @media (min-width: 480px) {
+      padding: $spacing-4;
+    }
+
+    @include respond-to(md) {
+      padding: $spacing-6;
+    }
 
     // Dark mode
     [data-theme="dark"] & {
@@ -112,22 +137,36 @@
 
   &__stat-value {
     display: block;
-    font-size: $font-size-3xl;
+    font-size: $font-size-xl; // Smaller for mobile
     font-weight: $font-weight-extrabold;
     color: $primary-color;
-    margin-bottom: $spacing-2;
+    margin-bottom: $spacing-1;
+
+    @media (min-width: 480px) {
+      font-size: $font-size-2xl;
+      margin-bottom: $spacing-2;
+    }
 
     @include respond-to(md) {
+      font-size: $font-size-3xl;
+    }
+
+    @include respond-to(lg) {
       font-size: $font-size-4xl;
     }
   }
 
   &__stat-label {
-    font-size: $font-size-sm;
+    font-size: $font-size-xs; // Smaller for mobile
     font-weight: $font-weight-semibold;
     color: $gray-600;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.25px;
+
+    @media (min-width: 480px) {
+      font-size: $font-size-sm;
+      letter-spacing: 0.5px;
+    }
 
     @include respond-to(md) {
       font-size: $font-size-base;

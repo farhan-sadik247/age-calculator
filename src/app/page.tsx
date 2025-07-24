@@ -20,15 +20,15 @@ export default function Home() {
       {/* Main Content */}
       <main className="container py-8">
         {/* Page Header */}
-        <header className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-gradient mb-4">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gradient mb-4 px-4">
             Age Calculator
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Calculate your exact age in years, months, days, hours, minutes, and seconds.
             Get personalized BMI analysis, custom diet plans, and expert health tips.
           </p>
-        </header>
+        </div>
         {/* Date Input Section */}
         <section className="mb-12">
           <div className="max-w-2xl mx-auto">
