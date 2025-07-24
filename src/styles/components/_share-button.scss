@@ -1,0 +1,240 @@
+.share-button {
+  position: relative;
+  display: inline-block;
+
+  &__trigger {
+    @include button-primary;
+    @include flex-center;
+    gap: $spacing-2;
+    padding: $spacing-3 $spacing-6;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    background: linear-gradient(135deg, $secondary-color 0%, $secondary-light 100%);
+    border: none;
+    border-radius: $border-radius-lg;
+    transition: all $transition-base;
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, $secondary-dark 0%, $secondary-color 100%);
+      transform: translateY(-2px);
+      box-shadow: $shadow-lg;
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    @include respond-to(md) {
+      padding: $spacing-4 $spacing-8;
+      font-size: $font-size-lg;
+    }
+  }
+
+  &__icon {
+    font-size: $font-size-lg;
+    
+    @include respond-to(md) {
+      font-size: $font-size-xl;
+    }
+  }
+
+  &__dropdown {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: $z-modal;
+    @include flex-center;
+    padding: $spacing-4;
+
+    @include respond-to(md) {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      right: auto;
+      bottom: auto;
+      transform: translateX(-50%);
+      margin-top: $spacing-2;
+      padding: 0;
+    }
+  }
+
+  &__dropdown-content {
+    @include card;
+    background: $white;
+    border: 2px solid $gray-200;
+    border-radius: $border-radius-xl;
+    padding: $spacing-6;
+    max-width: 320px;
+    width: 100%;
+    animation: scaleIn 0.2s ease-out;
+    position: relative;
+    z-index: $z-modal + 1;
+
+    @include respond-to(md) {
+      max-width: 280px;
+      padding: $spacing-5;
+    }
+  }
+
+  &__dropdown-title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $gray-800;
+    text-align: center;
+    margin-bottom: $spacing-5;
+
+    @include respond-to(md) {
+      font-size: $font-size-xl;
+    }
+  }
+
+  &__options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-3;
+
+    @include respond-to(md) {
+      gap: $spacing-2;
+    }
+  }
+
+  &__option {
+    @include button-base;
+    @include flex-column-center;
+    gap: $spacing-2;
+    padding: $spacing-4;
+    background: $gray-50;
+    color: $gray-700;
+    border: 1px solid $gray-200;
+    border-radius: $border-radius-lg;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    transition: all $transition-base;
+
+    &:hover:not(:disabled) {
+      background: $gray-100;
+      border-color: $gray-300;
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    &--copied {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: $success;
+      color: $success;
+
+      &:hover {
+        background: rgba(16, 185, 129, 0.2);
+      }
+    }
+
+    @include respond-to(md) {
+      padding: $spacing-3;
+      font-size: $font-size-xs;
+    }
+  }
+
+  &__option-icon {
+    font-size: $font-size-xl;
+    line-height: 1;
+
+    @include respond-to(md) {
+      font-size: $font-size-lg;
+    }
+  }
+
+  &__backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: $z-modal;
+
+    @include respond-to(md) {
+      display: none;
+    }
+  }
+
+  // Animation for dropdown appearance
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  // Stagger animation for options
+  &__option {
+    animation: slideUp 0.3s ease-out;
+
+    @for $i from 1 through 6 {
+      &:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.05}s;
+      }
+    }
+  }
+
+  // Focus states
+  &__trigger:focus,
+  &__option:focus {
+    outline: 2px solid $primary-color;
+    outline-offset: 2px;
+  }
+
+  // Mobile-specific styles
+  @media (max-width: $breakpoint-sm - 1px) {
+    &__dropdown-content {
+      margin: $spacing-4;
+      max-width: none;
+    }
+
+    &__options {
+      grid-template-columns: 1fr;
+      gap: $spacing-2;
+    }
+
+    &__option {
+      flex-direction: row;
+      justify-content: flex-start;
+      padding: $spacing-4 $spacing-5;
+      font-size: $font-size-base;
+    }
+
+    &__option-icon {
+      font-size: $font-size-xl;
+    }
+  }
+
+  // Dark mode support (if needed in the future)
+  @media (prefers-color-scheme: dark) {
+    &__dropdown-content {
+      background: $gray-800;
+      border-color: $gray-600;
+    }
+
+    &__dropdown-title {
+      color: $white;
+    }
+
+    &__option {
+      background: $gray-700;
+      color: $gray-200;
+      border-color: $gray-600;
+
+      &:hover {
+        background: $gray-600;
+      }
+    }
+  }
+}

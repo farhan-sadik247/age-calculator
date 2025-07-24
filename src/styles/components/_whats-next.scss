@@ -1,0 +1,148 @@
+.whats-next-card {
+  @include card;
+  display: flex;
+  gap: $spacing-4;
+  padding: $spacing-6;
+  background: linear-gradient(135deg, $white 0%, $gray-50 100%);
+  border: 2px solid $gray-200;
+  max-width: 600px;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+
+  // Dark mode
+  [data-theme="dark"] & {
+    background: linear-gradient(135deg, $dark-surface 0%, $dark-bg 100%);
+    border-color: $dark-border;
+  }
+
+  &__button {
+    @include flex-center;
+    flex-direction: column;
+    gap: $spacing-2;
+    padding: $spacing-4;
+    background: transparent;
+    border: 2px solid transparent;
+    border-radius: $border-radius-lg;
+    text-decoration: none;
+    color: $gray-700;
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-sm;
+    transition: all $transition-base;
+    flex: 1;
+    min-height: 80px;
+
+    // Dark mode
+    [data-theme="dark"] & {
+      color: $dark-text;
+    }
+
+    &:hover {
+      background: linear-gradient(135deg, $primary-color 0%, $primary-light 100%);
+      border-color: $primary-color;
+      color: $white;
+      text-decoration: none;
+      transform: translateY(-2px);
+      box-shadow: $shadow-md;
+    }
+
+    &:focus {
+      outline: 2px solid $primary-color;
+      outline-offset: 2px;
+    }
+
+    // Different colors for each button
+    &:nth-child(1) {
+      &:hover {
+        background: linear-gradient(135deg, $success 0%, #34d399 100%);
+        border-color: $success;
+      }
+    }
+
+    &:nth-child(2) {
+      &:hover {
+        background: linear-gradient(135deg, $secondary-color 0%, $secondary-light 100%);
+        border-color: $secondary-color;
+      }
+    }
+
+    &:nth-child(3) {
+      &:hover {
+        background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+        border-color: #8b5cf6;
+      }
+    }
+  }
+
+  &__icon {
+    font-size: $font-size-2xl;
+    line-height: 1;
+    transition: all $transition-base;
+
+    @include respond-to(md) {
+      font-size: $font-size-3xl;
+    }
+  }
+
+  &__text {
+    font-family: $font-family-heading;
+    letter-spacing: 0.5px;
+    text-align: center;
+
+    @include respond-to(md) {
+      font-size: $font-size-base;
+    }
+
+    // Dark mode
+    [data-theme="dark"] & {
+      color: $dark-text;
+    }
+  }
+
+  // Hover effect for icon
+  &__button:hover &__icon {
+    transform: scale(1.1);
+  }
+
+  // Responsive adjustments
+  @include respond-to(md) {
+    padding: $spacing-8;
+    gap: $spacing-6;
+  }
+
+  // Mobile adjustments
+  @media (max-width: $breakpoint-sm - 1px) {
+    flex-direction: column;
+    gap: $spacing-3;
+    padding: $spacing-4;
+
+    &__button {
+      flex-direction: row;
+      gap: $spacing-3;
+      min-height: 60px;
+      width: 100%;
+    }
+
+    &__icon {
+      font-size: $font-size-xl;
+    }
+
+    &__text {
+      font-size: $font-size-sm;
+    }
+  }
+
+  // Animation
+  animation: slideUp 0.6s ease-out;
+
+  // Stagger animation for buttons
+  &__button {
+    animation: fadeIn 0.6s ease-out;
+
+    @for $i from 1 through 3 {
+      &:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.1}s;
+      }
+    }
+  }
+}

@@ -1,0 +1,570 @@
+.diet-chart {
+  // Dark mode
+  [data-theme="dark"] & {
+    color: $dark-text;
+
+    // All text elements except Daily Meal Plan
+    p, span, div, label, h1, h2, h4, h5, h6, li {
+      color: $dark-text !important;
+    }
+
+    // General h3 styling but will be overridden for Daily Meal Plan
+    h3 {
+      color: $dark-text !important;
+    }
+
+    // Specific elements
+    .meal-title,
+    .ingredients,
+    .guidelines,
+    .balanced-meal,
+    .select-category {
+      color: $dark-text !important;
+    }
+  }
+
+  &__bmi-selector {
+    display: grid;
+    gap: $spacing-4;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    max-width: 800px;
+    margin: 0 auto;
+
+    @media (max-width: $breakpoint-sm - 1px) {
+      grid-template-columns: 1fr;
+      gap: $spacing-3;
+    }
+  }
+
+  &__bmi-button {
+    @include button-base;
+    @include card;
+    padding: $spacing-5;
+    text-align: center;
+    background: $white;
+    border: 2px solid $gray-300;
+    transition: all $transition-base;
+    cursor: pointer;
+
+    // Dark mode
+    [data-theme="dark"] & {
+      background: $dark-surface;
+      border-color: $dark-border;
+      color: $dark-text;
+
+      // All text in buttons
+      h3, p, span, div {
+        color: $dark-text !important;
+      }
+
+      &:hover {
+        color: $dark-text !important;
+      }
+    }
+
+    &:hover:not(&--active) {
+      border-color: $gray-400;
+      transform: translateY(-2px);
+      box-shadow: $shadow-md;
+    }
+
+    &--active {
+      transform: translateY(-2px);
+      box-shadow: $shadow-lg;
+    }
+
+    @media (max-width: $breakpoint-sm - 1px) {
+      padding: $spacing-4;
+    }
+  }
+
+  &__bmi-label {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $gray-800;
+    margin-bottom: $spacing-1;
+
+    @include respond-to(md) {
+      font-size: $font-size-xl;
+    }
+  }
+
+  &__bmi-range {
+    font-size: $font-size-sm;
+    color: $gray-600;
+    font-weight: $font-weight-medium;
+
+    @include respond-to(md) {
+      font-size: $font-size-base;
+    }
+  }
+
+  &__quick-link {
+    @include card-hover;
+    @include flex-center;
+    gap: $spacing-4;
+    padding: $spacing-6;
+    background: linear-gradient(135deg, $white 0%, $gray-50 100%);
+    border: 2px solid $gray-200;
+    text-decoration: none;
+    color: inherit;
+    transition: all $transition-base;
+
+    &:hover {
+      border-color: $primary-light;
+      transform: translateY(-2px);
+      box-shadow: $shadow-lg;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    h3 {
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+      color: $gray-800;
+      margin-bottom: $spacing-1;
+    }
+
+    p {
+      font-size: $font-size-base;
+      color: $gray-600;
+      margin: 0;
+    }
+  }
+
+  &__quick-link-icon {
+    font-size: $font-size-3xl;
+    flex-shrink: 0;
+  }
+}
+
+.diet-plan {
+  @include card;
+  background: linear-gradient(135deg, $white 0%, $gray-50 100%);
+  border: 2px solid $gray-200;
+  padding: $spacing-8;
+
+  &__header {
+    text-align: center;
+    margin-bottom: $spacing-8;
+    position: relative;
+  }
+
+  &__title {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    color: $gray-800;
+    margin-bottom: $spacing-2;
+    @include text-gradient;
+
+    @include respond-to(md) {
+      font-size: $font-size-4xl;
+    }
+  }
+
+  &__target {
+    font-size: $font-size-lg;
+    color: $gray-600;
+    margin-bottom: $spacing-6;
+
+    @include respond-to(md) {
+      font-size: $font-size-xl;
+    }
+  }
+
+  &__download-btn {
+    @include button-primary;
+    @include flex-center;
+    gap: $spacing-2;
+    padding: $spacing-4 $spacing-6;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    background: linear-gradient(135deg, $secondary-color 0%, $secondary-light 100%);
+    border: none;
+    border-radius: $border-radius-lg;
+    transition: all $transition-base;
+
+    &:hover {
+      background: linear-gradient(135deg, $secondary-dark 0%, $secondary-color 100%);
+      transform: translateY(-2px);
+      box-shadow: $shadow-lg;
+    }
+
+    @include respond-to(md) {
+      font-size: $font-size-lg;
+      padding: $spacing-4 $spacing-8;
+    }
+  }
+
+  &__nutrition-summary {
+    @include card;
+    margin-bottom: $spacing-8;
+    padding: $spacing-6;
+    background: linear-gradient(135deg, $primary-color 0%, $primary-light 100%);
+    color: $white;
+    border: none;
+
+    h3 {
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
+      margin-bottom: $spacing-4;
+      text-align: center;
+
+      @include respond-to(md) {
+        font-size: $font-size-2xl;
+      }
+    }
+  }
+
+  &__guidelines,
+  &__restrictions {
+    @include card;
+    margin-bottom: $spacing-6;
+    padding: $spacing-6;
+    background: $white;
+
+    // Dark mode
+    [data-theme="dark"] & {
+      background: $dark-surface !important;
+      color: $dark-text !important;
+
+      h3, h4, p, li, span {
+        color: $dark-text !important;
+      }
+    }
+    border: 1px solid $gray-200;
+
+    h3 {
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+      color: $gray-800;
+      margin-bottom: $spacing-4;
+
+      @include respond-to(md) {
+        font-size: $font-size-xl;
+      }
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        font-size: $font-size-base;
+        color: $gray-600;
+        margin-bottom: $spacing-2;
+        padding-left: $spacing-6;
+        position: relative;
+        line-height: 1.5;
+
+        &::before {
+          content: '•';
+          color: $primary-color;
+          font-weight: bold;
+          position: absolute;
+          left: 0;
+        }
+
+        @include respond-to(md) {
+          font-size: $font-size-lg;
+        }
+      }
+    }
+  }
+
+  &__restrictions {
+    border-left: 4px solid $warning;
+
+    ul li::before {
+      content: '⚠️';
+      font-size: $font-size-sm;
+    }
+  }
+
+  &__meals {
+    h3 {
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-bold;
+      color: $gray-800;
+      margin-bottom: $spacing-6;
+      text-align: center;
+
+      @include respond-to(md) {
+        font-size: $font-size-3xl;
+      }
+
+      // Make "Daily Meal Plan" text black in dark mode only
+      [data-theme="dark"] & {
+        color: #000000 !important;
+      }
+    }
+  }
+
+  // Responsive adjustments
+  @include respond-to(sm) {
+    padding: $spacing-10;
+  }
+
+  @media (max-width: $breakpoint-sm - 1px) {
+    margin: $spacing-4;
+    padding: $spacing-6;
+
+    &__header {
+      margin-bottom: $spacing-6;
+    }
+
+    &__nutrition-summary,
+    &__guidelines,
+    &__restrictions {
+      margin-bottom: $spacing-4;
+      padding: $spacing-4;
+    }
+  }
+}
+
+.nutrition-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: $spacing-4;
+
+  @media (max-width: $breakpoint-sm - 1px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-3;
+  }
+}
+
+.nutrition-item {
+  @include flex-column-center;
+  text-align: center;
+
+  .nutrition-value {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-extrabold;
+    line-height: 1;
+    margin-bottom: $spacing-1;
+
+    @include respond-to(md) {
+      font-size: $font-size-3xl;
+    }
+  }
+
+  .nutrition-label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    opacity: 0.9;
+
+    @include respond-to(md) {
+      font-size: $font-size-base;
+    }
+  }
+}
+
+.meals-grid {
+  display: grid;
+  gap: $spacing-4;
+  grid-template-columns: 1fr;
+
+  @include respond-to(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond-to(lg) {
+    gap: $spacing-6;
+  }
+}
+
+.meal-card {
+  @include card-hover;
+  padding: $spacing-6;
+  background: $white;
+  border: 2px solid $gray-200;
+  cursor: pointer;
+
+  // Dark mode
+  [data-theme="dark"] & {
+    background: $dark-surface !important;
+    border-color: $dark-border !important;
+    color: $dark-text !important;
+
+    // All text elements in meal cards
+    h3, h4, h5, p, li, span, div {
+      color: $dark-text !important;
+    }
+
+    // Meal titles specifically
+    .meal-title,
+    .balanced-meal {
+      color: $dark-text !important;
+    }
+  }
+  transition: all $transition-base;
+
+  &:hover {
+    border-color: $primary-light;
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+  }
+
+  &--expanded {
+    border-color: $primary-color;
+    box-shadow: $shadow-lg;
+  }
+
+  &__header {
+    @include flex-center;
+    gap: $spacing-4;
+    margin-bottom: $spacing-4;
+    align-items: flex-start;
+  }
+
+  &__icon {
+    font-size: $font-size-3xl;
+    flex-shrink: 0;
+    line-height: 1;
+
+    @include respond-to(md) {
+      font-size: $font-size-4xl;
+    }
+  }
+
+  &__info {
+    flex: 1;
+  }
+
+  &__name {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $gray-800;
+    margin-bottom: $spacing-1;
+
+    @include respond-to(md) {
+      font-size: $font-size-xl;
+    }
+  }
+
+  &__type {
+    font-size: $font-size-sm;
+    color: $primary-color;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: $spacing-1;
+
+    @include respond-to(md) {
+      font-size: $font-size-base;
+    }
+  }
+
+  &__calories {
+    font-size: $font-size-base;
+    color: $gray-600;
+    font-weight: $font-weight-medium;
+
+    @include respond-to(md) {
+      font-size: $font-size-lg;
+    }
+  }
+
+  &__details {
+    padding-top: $spacing-4;
+    border-top: 1px solid $gray-200;
+    animation: slideDown 0.3s ease-out;
+  }
+
+  &__ingredients,
+  &__instructions,
+  &__nutrition {
+    margin-bottom: $spacing-4;
+
+    // Dark mode
+    [data-theme="dark"] & {
+      color: $dark-text !important;
+
+      h5, p, li, span {
+        color: $dark-text !important;
+      }
+    }
+
+    h5 {
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      color: $gray-800;
+      margin-bottom: $spacing-2;
+
+      @include respond-to(md) {
+        font-size: $font-size-lg;
+      }
+    }
+
+    ul, ol {
+      padding-left: $spacing-5;
+      margin: 0;
+
+      li {
+        font-size: $font-size-sm;
+        color: $gray-600;
+        margin-bottom: $spacing-1;
+        line-height: 1.5;
+
+        @include respond-to(md) {
+          font-size: $font-size-base;
+        }
+      }
+    }
+  }
+
+  .nutrition-mini-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-2;
+    font-size: $font-size-sm;
+    color: $gray-600;
+
+    @include respond-to(md) {
+      font-size: $font-size-base;
+    }
+  }
+
+  // Animation for cards
+  animation: slideUp 0.6s ease-out;
+
+  // Stagger animation for multiple cards
+  @for $i from 1 through 8 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.1}s;
+    }
+  }
+
+  // Responsive adjustments
+  @media (max-width: $breakpoint-sm - 1px) {
+    padding: $spacing-4;
+
+    &__header {
+      gap: $spacing-3;
+    }
+
+    &__icon {
+      font-size: $font-size-2xl;
+    }
+
+    &__details {
+      padding-top: $spacing-3;
+    }
+
+    &__ingredients,
+    &__instructions,
+    &__nutrition {
+      margin-bottom: $spacing-3;
+    }
+
+    .nutrition-mini-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// Specific override for Daily Meal Plan text to be black in dark mode
+[data-theme="dark"] .diet-plan__meals h3 {
+  color: #000000 !important;
+}

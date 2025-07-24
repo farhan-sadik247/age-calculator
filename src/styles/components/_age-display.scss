@@ -1,0 +1,361 @@
+.age-display {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: $spacing-6;
+
+  &--loading {
+    @include flex-column-center;
+    padding: $spacing-12;
+    min-height: 200px;
+  }
+
+  &__spinner {
+    @include spinner(40px, $primary-color);
+    margin-bottom: $spacing-4;
+  }
+
+  &__loading-text {
+    color: $gray-600;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-medium;
+  }
+
+  &__main {
+    text-align: center;
+    margin-bottom: $spacing-8;
+  }
+
+  &__title {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $gray-800;
+    margin-bottom: $spacing-4;
+
+    @include respond-to(md) {
+      font-size: $font-size-3xl;
+    }
+
+    // Dark mode
+    [data-theme="dark"] & {
+      color: $dark-text;
+    }
+  }
+
+  &__primary {
+    @include card;
+    background: $white;
+    border: 2px solid $primary-color;
+    padding: $spacing-8;
+    margin-bottom: $spacing-6;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      @include gradient-primary;
+    }
+
+    // Dark mode
+    [data-theme="dark"] & {
+      background: $dark-surface;
+      border-color: $primary-color;
+    }
+  }
+
+  &__primary-text {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    @include text-gradient;
+    line-height: 1.2;
+
+    @include respond-to(md) {
+      font-size: $font-size-3xl;
+    }
+
+    @include respond-to(lg) {
+      font-size: $font-size-4xl;
+    }
+  }
+
+  &__breakdown {
+    margin-bottom: $spacing-8;
+  }
+
+  &__breakdown-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-4;
+
+    @include respond-to(md) {
+      gap: $spacing-6;
+    }
+  }
+
+  &__stat {
+    @include card-hover;
+    text-align: center;
+    padding: $spacing-6;
+    background: linear-gradient(135deg, $white 0%, $gray-50 100%);
+    border: 1px solid $gray-200;
+
+    // Dark mode
+    [data-theme="dark"] & {
+      background: linear-gradient(135deg, $dark-surface 0%, $dark-bg 100%);
+      border-color: $dark-border;
+    }
+  }
+
+  &__stat-value {
+    display: block;
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-extrabold;
+    color: $primary-color;
+    margin-bottom: $spacing-2;
+
+    @include respond-to(md) {
+      font-size: $font-size-4xl;
+    }
+  }
+
+  &__stat-label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $gray-600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    @include respond-to(md) {
+      font-size: $font-size-base;
+    }
+
+    // Dark mode
+    [data-theme="dark"] & {
+      color: $dark-text-secondary;
+    }
+  }
+
+  &__totals {
+    margin-bottom: $spacing-8;
+  }
+
+  &__totals-title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $gray-800;
+    text-align: center;
+    margin-bottom: $spacing-6;
+
+    @include respond-to(md) {
+      font-size: $font-size-2xl;
+    }
+
+    // Dark mode
+    [data-theme="dark"] & {
+      color: $dark-text;
+    }
+  }
+
+  &__totals-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-3;
+
+    @include respond-to(sm) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: $spacing-3;
+    }
+
+    @include respond-to(md) {
+      grid-template-columns: repeat(6, 1fr);
+      gap: $spacing-4;
+    }
+
+    @include respond-to(lg) {
+      gap: $spacing-5;
+    }
+  }
+
+  &__total-item {
+    @include card;
+    @include flex-column-center;
+    padding: $spacing-3;
+    background: linear-gradient(135deg, $secondary-color 0%, $secondary-light 100%);
+    color: $white;
+    border: none;
+    transition: all $transition-base;
+    min-height: 80px;
+    overflow: hidden;
+    word-wrap: break-word;
+    text-align: center;
+
+    &:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: $shadow-lg;
+    }
+
+    @include respond-to(sm) {
+      padding: $spacing-4;
+      min-height: 90px;
+    }
+
+    @include respond-to(md) {
+      padding: $spacing-4;
+      min-height: 100px;
+    }
+
+    @include respond-to(lg) {
+      padding: $spacing-5;
+      min-height: 110px;
+    }
+  }
+
+  &__total-value {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacing-1;
+    line-height: 1.1;
+    word-break: break-all;
+    overflow-wrap: break-word;
+
+    @include respond-to(sm) {
+      font-size: $font-size-base;
+    }
+
+    @include respond-to(md) {
+      font-size: $font-size-lg;
+    }
+
+    @include respond-to(lg) {
+      font-size: $font-size-xl;
+    }
+
+    // For very large numbers, use smaller font
+    &.large-number {
+      font-size: $font-size-xs;
+
+      @include respond-to(sm) {
+        font-size: $font-size-sm;
+      }
+
+      @include respond-to(md) {
+        font-size: $font-size-base;
+      }
+
+      @include respond-to(lg) {
+        font-size: $font-size-lg;
+      }
+    }
+  }
+
+  &__total-label {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    opacity: 0.9;
+    line-height: 1.2;
+    margin-top: $spacing-1;
+
+    @include respond-to(sm) {
+      font-size: $font-size-xs;
+    }
+
+    @include respond-to(md) {
+      font-size: $font-size-sm;
+    }
+
+    @include respond-to(lg) {
+      font-size: $font-size-base;
+    }
+  }
+
+  &__next-birthday {
+    @include card;
+    background: linear-gradient(135deg, $primary-color 0%, $primary-light 100%);
+    color: $white;
+    text-align: center;
+    border: none;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '🎉';
+      position: absolute;
+      top: $spacing-4;
+      right: $spacing-4;
+      font-size: $font-size-2xl;
+      opacity: 0.3;
+    }
+  }
+
+  &__next-birthday-title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacing-4;
+
+    @include respond-to(md) {
+      font-size: $font-size-2xl;
+    }
+  }
+
+  &__next-birthday-content {
+    @include flex-column;
+    gap: $spacing-4;
+
+    @include respond-to(md) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  &__next-birthday-date {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-medium;
+    opacity: 0.95;
+
+    @include respond-to(md) {
+      font-size: $font-size-xl;
+    }
+  }
+
+  &__next-birthday-countdown {
+    @include flex-column-center;
+    gap: $spacing-1;
+  }
+
+  &__countdown-number {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-extrabold;
+    line-height: 1;
+
+    @include respond-to(md) {
+      font-size: $font-size-4xl;
+    }
+  }
+
+  &__countdown-label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    opacity: 0.9;
+
+    @include respond-to(md) {
+      font-size: $font-size-base;
+    }
+  }
+
+  // Stagger animation for grid items
+  &__breakdown-grid .age-display__stat,
+  &__totals-grid .age-display__total-item {
+    animation: slideUp 0.6s ease-out;
+
+    @for $i from 1 through 6 {
+      &:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.1}s;
+      }
+    }
+  }
+}

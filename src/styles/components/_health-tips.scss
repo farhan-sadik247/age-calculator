@@ -1,0 +1,384 @@
+.health-tips {
+  // Dark mode
+  [data-theme="dark"] & {
+    color: $dark-text;
+  }
+
+  &__search {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  &__search-input {
+    @include input-base;
+    width: 100%;
+    padding: $spacing-4 $spacing-12 $spacing-4 $spacing-4;
+    font-size: $font-size-lg;
+    border: 2px solid $gray-300;
+    border-radius: $border-radius-xl;
+    background: $white;
+
+    &:focus {
+      border-color: $primary-color;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+
+    &::placeholder {
+      color: $gray-400;
+    }
+
+    // Dark mode
+    [data-theme="dark"] & {
+      background: $dark-surface;
+      border-color: $dark-border;
+      color: $dark-text;
+
+      &::placeholder {
+        color: $dark-text-secondary;
+      }
+    }
+  }
+
+  &__search-icon {
+    position: absolute;
+    right: $spacing-4;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: $font-size-xl;
+    color: $gray-400;
+  }
+
+  &__categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-3;
+    justify-content: center;
+
+    @media (max-width: $breakpoint-md - 1px) {
+      gap: $spacing-2;
+    }
+  }
+
+  &__category-button {
+    @include button-base;
+    @include flex-center;
+    gap: $spacing-2;
+    padding: $spacing-3 $spacing-5;
+    background: $white;
+    color: $gray-700;
+    border: 2px solid $gray-300;
+    border-radius: $border-radius-full;
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    transition: all $transition-base;
+
+    &:hover:not(&--active) {
+      background: $gray-100;
+      border-color: $gray-400;
+      transform: translateY(-1px);
+    }
+
+    &--active {
+      background: linear-gradient(135deg, $primary-color 0%, $primary-light 100%);
+      color: $white;
+      border-color: $primary-color;
+      box-shadow: $shadow;
+    }
+
+    @media (max-width: $breakpoint-sm - 1px) {
+      padding: $spacing-2 $spacing-4;
+      font-size: $font-size-sm;
+    }
+  }
+
+  &__category-icon {
+    font-size: $font-size-lg;
+    line-height: 1;
+
+    @media (max-width: $breakpoint-sm - 1px) {
+      font-size: $font-size-base;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    gap: $spacing-6;
+    grid-template-columns: 1fr;
+
+    @include respond-to(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond-to(lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__empty {
+    @include flex-column-center;
+    padding: $spacing-16;
+    text-align: center;
+    background: linear-gradient(135deg, $gray-50 0%, $white 100%);
+    border: 2px dashed $gray-300;
+    border-radius: $border-radius-xl;
+    margin: $spacing-8 0;
+  }
+
+  &__empty-icon {
+    font-size: $font-size-5xl;
+    margin-bottom: $spacing-4;
+    opacity: 0.7;
+  }
+
+  &__empty-title {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $gray-700;
+    margin-bottom: $spacing-2;
+  }
+
+  &__empty-description {
+    font-size: $font-size-lg;
+    color: $gray-600;
+    max-width: 400px;
+  }
+
+  &__quick-link {
+    @include card-hover;
+    @include flex-center;
+    gap: $spacing-4;
+    padding: $spacing-6;
+    background: linear-gradient(135deg, $white 0%, $gray-50 100%);
+    border: 2px solid $gray-200;
+    text-decoration: none;
+    color: inherit;
+    transition: all $transition-base;
+
+    &:hover {
+      border-color: $primary-light;
+      transform: translateY(-2px);
+      box-shadow: $shadow-lg;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    h3 {
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+      color: $gray-800;
+      margin-bottom: $spacing-1;
+    }
+
+    p {
+      font-size: $font-size-base;
+      color: $gray-600;
+      margin: 0;
+    }
+  }
+
+  &__quick-link-icon {
+    font-size: $font-size-3xl;
+    flex-shrink: 0;
+  }
+}
+
+.health-tip-card {
+  @include card-hover;
+  padding: $spacing-6;
+  background: linear-gradient(135deg, $white 0%, $gray-50 100%);
+  border: 2px solid $gray-200;
+  transition: all $transition-base;
+  animation: slideUp 0.6s ease-out;
+
+  // Dark mode
+  [data-theme="dark"] & {
+    background: linear-gradient(135deg, $dark-surface 0%, $dark-bg 100%);
+    border-color: $dark-border;
+    color: $dark-text;
+  }
+
+  &:hover {
+    border-color: $primary-light;
+    transform: translateY(-4px);
+    box-shadow: $shadow-xl;
+  }
+
+  &__header {
+    @include flex-center;
+    gap: $spacing-4;
+    margin-bottom: $spacing-4;
+    align-items: flex-start;
+  }
+
+  &__icon {
+    font-size: $font-size-3xl;
+    flex-shrink: 0;
+    line-height: 1;
+
+    @include respond-to(md) {
+      font-size: $font-size-4xl;
+    }
+  }
+
+  &__title-section {
+    flex: 1;
+  }
+
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $gray-800;
+    margin-bottom: $spacing-1;
+    line-height: 1.3;
+
+    @include respond-to(md) {
+      font-size: $font-size-xl;
+    }
+
+    // Dark mode
+    [data-theme="dark"] & {
+      color: $dark-text;
+    }
+  }
+
+  &__category {
+    display: inline-block;
+    padding: $spacing-1 $spacing-3;
+    background: rgba(99, 102, 241, 0.1);
+    color: $primary-color;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    border-radius: $border-radius-full;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    @include respond-to(md) {
+      font-size: $font-size-sm;
+    }
+  }
+
+  &__description {
+    font-size: $font-size-base;
+    color: $gray-600;
+    line-height: 1.6;
+    margin-bottom: $spacing-5;
+
+    @include respond-to(md) {
+      font-size: $font-size-lg;
+    }
+  }
+
+  &__expanded {
+    margin-bottom: $spacing-5;
+    padding-top: $spacing-4;
+    border-top: 1px solid $gray-200;
+    animation: slideDown 0.3s ease-out;
+  }
+
+  &__content,
+  &__benefits {
+    margin-bottom: $spacing-4;
+
+    h4 {
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      color: $gray-800;
+      margin-bottom: $spacing-2;
+
+      @include respond-to(md) {
+        font-size: $font-size-lg;
+      }
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        font-size: $font-size-sm;
+        color: $gray-600;
+        margin-bottom: $spacing-2;
+        padding-left: $spacing-5;
+        position: relative;
+        line-height: 1.5;
+
+        &::before {
+          content: '•';
+          color: $primary-color;
+          font-weight: bold;
+          position: absolute;
+          left: 0;
+        }
+
+        @include respond-to(md) {
+          font-size: $font-size-base;
+        }
+      }
+    }
+  }
+
+  &__benefits {
+    ul li::before {
+      content: '✓';
+      color: $success;
+    }
+  }
+
+  &__toggle {
+    @include button-primary;
+    width: 100%;
+    padding: $spacing-3 $spacing-4;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    background: linear-gradient(135deg, $primary-color 0%, $primary-light 100%);
+    border: none;
+    border-radius: $border-radius;
+    transition: all $transition-base;
+
+    &:hover {
+      background: linear-gradient(135deg, $primary-dark 0%, $primary-color 100%);
+      transform: translateY(-1px);
+      box-shadow: $shadow-md;
+    }
+
+    @include respond-to(md) {
+      font-size: $font-size-lg;
+    }
+  }
+
+  // Responsive adjustments
+  @include respond-to(sm) {
+    padding: $spacing-8;
+  }
+
+  @media (max-width: $breakpoint-sm - 1px) {
+    padding: $spacing-4;
+
+    &__header {
+      gap: $spacing-3;
+    }
+
+    &__icon {
+      font-size: $font-size-2xl;
+    }
+
+    &__title {
+      font-size: $font-size-base;
+    }
+
+    &__description {
+      font-size: $font-size-sm;
+    }
+  }
+}
+
+// Animation for staggered card appearance
+.health-tips__grid .health-tip-card {
+  @for $i from 1 through 12 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.1}s;
+    }
+  }
+}

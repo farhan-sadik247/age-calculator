@@ -1,0 +1,219 @@
+.suggestion-card {
+  @include card-hover;
+  padding: $spacing-8;
+  text-align: center;
+  background: linear-gradient(135deg, $white 0%, $gray-50 100%);
+  border: 2px solid $gray-200;
+  transition: all $transition-base;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, $primary-color 0%, $secondary-color 100%);
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-xl;
+    border-color: $primary-light;
+
+    .suggestion-card__icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .suggestion-card__button {
+      background: linear-gradient(135deg, $primary-dark 0%, $primary-color 100%);
+      transform: translateY(-2px);
+    }
+  }
+
+  &__icon {
+    font-size: $font-size-5xl;
+    margin-bottom: $spacing-4;
+    display: block;
+    transition: all $transition-base;
+    line-height: 1;
+
+    @include respond-to(md) {
+      font-size: 4rem;
+    }
+  }
+
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $gray-800;
+    margin-bottom: $spacing-3;
+    font-family: $font-family-heading;
+
+    @include respond-to(md) {
+      font-size: $font-size-2xl;
+    }
+  }
+
+  &__description {
+    font-size: $font-size-base;
+    color: $gray-600;
+    line-height: 1.6;
+    margin-bottom: $spacing-6;
+    max-width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include respond-to(md) {
+      font-size: $font-size-lg;
+    }
+  }
+
+  &__button {
+    @include button-primary;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-4 $spacing-8;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    text-decoration: none;
+    border-radius: $border-radius-lg;
+    transition: all $transition-base;
+    background: linear-gradient(135deg, $primary-color 0%, $primary-light 100%);
+    color: $white;
+    border: none;
+    cursor: pointer;
+    min-width: 140px;
+
+    &:hover {
+      text-decoration: none;
+      color: $white;
+      box-shadow: $shadow-lg;
+    }
+
+    &:focus {
+      outline: 2px solid $primary-color;
+      outline-offset: 2px;
+    }
+
+    @include respond-to(md) {
+      padding: $spacing-4 $spacing-10;
+      font-size: $font-size-lg;
+    }
+  }
+
+  // Animation for cards
+  animation: slideUp 0.6s ease-out;
+
+  // Stagger animation for multiple cards
+  @for $i from 1 through 3 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.2}s;
+    }
+  }
+
+  // Special styling for different card types
+  &:nth-child(1) {
+    &::before {
+      background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
+    }
+
+    &:hover {
+      border-color: #10b981;
+    }
+
+    .suggestion-card__button {
+      background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+
+      &:hover {
+        background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+      }
+    }
+  }
+
+  &:nth-child(2) {
+    &::before {
+      background: linear-gradient(90deg, $secondary-color 0%, $secondary-light 100%);
+    }
+
+    &:hover {
+      border-color: $secondary-color;
+    }
+
+    .suggestion-card__button {
+      background: linear-gradient(135deg, $secondary-color 0%, $secondary-light 100%);
+
+      &:hover {
+        background: linear-gradient(135deg, $secondary-dark 0%, $secondary-color 100%);
+      }
+    }
+  }
+
+  &:nth-child(3) {
+    &::before {
+      background: linear-gradient(90deg, #8b5cf6 0%, #a78bfa 100%);
+    }
+
+    &:hover {
+      border-color: #8b5cf6;
+    }
+
+    .suggestion-card__button {
+      background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+
+      &:hover {
+        background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%);
+      }
+    }
+  }
+
+  // Responsive adjustments
+  @include respond-to(sm) {
+    padding: $spacing-10;
+  }
+
+  // Mobile optimizations
+  @media (max-width: $breakpoint-md - 1px) {
+    padding: $spacing-6;
+
+    &__icon {
+      font-size: $font-size-4xl;
+      margin-bottom: $spacing-3;
+    }
+
+    &__title {
+      font-size: $font-size-lg;
+      margin-bottom: $spacing-2;
+    }
+
+    &__description {
+      font-size: $font-size-sm;
+      margin-bottom: $spacing-4;
+    }
+
+    &__button {
+      padding: $spacing-3 $spacing-6;
+      font-size: $font-size-sm;
+    }
+  }
+
+  // Focus states for accessibility
+  &:focus-within {
+    outline: 2px solid $primary-color;
+    outline-offset: 2px;
+  }
+
+  // Loading state (if needed)
+  &--loading {
+    opacity: 0.7;
+    pointer-events: none;
+
+    .suggestion-card__button {
+      background: $gray-400;
+      cursor: not-allowed;
+    }
+  }
+}

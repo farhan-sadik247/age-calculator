@@ -1,0 +1,436 @@
+// Spinning animation for the flower
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Beautiful gradient animation for text
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+// Floating animation for text
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.navigation {
+  background: $white;
+  border-bottom: 2px solid $gray-200;
+  box-shadow: $shadow-sm;
+  position: sticky;
+  top: 0;
+  z-index: $z-header;
+
+  // Dark mode styles
+  [data-theme="dark"] & {
+    background: $dark-surface;
+    border-bottom-color: $dark-border;
+  }
+
+  &__container {
+    @include flex-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $spacing-4;
+    height: 70px;
+
+    @include respond-to(md) {
+      padding: 0 $spacing-6;
+    }
+  }
+
+  &__brand {
+    @include flex-center;
+    gap: $spacing-3;
+    text-decoration: none;
+    color: inherit;
+    transition: all $transition-base;
+    padding: $spacing-2;
+    border-radius: $border-radius;
+
+    &:hover {
+      text-decoration: none;
+      color: inherit;
+      transform: translateY(-1px);
+
+      .navigation__brand-flower {
+        animation: spin 2s linear infinite;
+        transform: scale(1.1);
+        filter: brightness(1.1) saturate(1.2);
+      }
+
+      .navigation__brand-text {
+        animation: float 2s ease-in-out infinite;
+        transform: scale(1.05);
+        color: transparent;
+
+        &::before {
+          opacity: 1;
+          animation: gradientShift 1.5s ease-in-out infinite;
+        }
+
+        &::after {
+          opacity: 0.4;
+          filter: blur(12px);
+        }
+      }
+    }
+  }
+
+  &__brand-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all $transition-base;
+  }
+
+  &__brand-flower {
+    width: 45px;
+    height: 45px;
+    transition: all $transition-base;
+    animation: spin 8s linear infinite;
+
+    @include respond-to(md) {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  &__brand-text {
+    font-family: 'Dancing Script', 'Brush Script MT', cursive;
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: 1px;
+    margin-left: $spacing-3;
+    color: $gray-800;
+    transition: all $transition-base;
+    position: relative;
+    text-shadow:
+      1px 1px 2px rgba(255, 255, 255, 0.8),
+      0 0 10px rgba(255, 107, 107, 0.3);
+
+    @include respond-to(md) {
+      font-size: 28px;
+      letter-spacing: 1.5px;
+    }
+
+    // Beautiful gradient overlay that appears on hover
+    &::before {
+      content: 'Age Calculator';
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 4s ease-in-out infinite;
+      opacity: 0;
+      transition: opacity $transition-base;
+    }
+
+    // Subtle glow effect
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+      background-size: 300% 300%;
+      animation: gradientShift 4s ease-in-out infinite;
+      filter: blur(8px);
+      opacity: 0.1;
+      z-index: -1;
+      transition: opacity $transition-base;
+    }
+
+    @media (max-width: $breakpoint-sm - 1px) {
+      display: none;
+    }
+
+    // Dark mode text color
+    [data-theme="dark"] & {
+      color: $dark-text;
+
+      &::before {
+        // Keep the gradient overlay for dark mode too
+        opacity: 0.8;
+      }
+    }
+  }
+
+  &__menu {
+    @include flex-center;
+    gap: $spacing-2;
+
+    @media (max-width: $breakpoint-md - 1px) {
+      display: none;
+    }
+
+    @include respond-to(lg) {
+      gap: $spacing-4;
+    }
+  }
+
+  &__link {
+    @include flex-center;
+    gap: $spacing-2;
+    padding: $spacing-3 $spacing-4;
+    text-decoration: none;
+    color: $gray-700;
+    font-weight: $font-weight-medium;
+    font-size: $font-size-sm;
+    border-radius: $border-radius-lg;
+    transition: all $transition-base;
+    position: relative;
+
+    &:hover:not(&--active) {
+      background: $gray-100;
+      color: $gray-800;
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    &--active {
+      background: linear-gradient(135deg, $primary-color 0%, $primary-light 100%);
+      color: $white;
+      box-shadow: $shadow;
+
+      &:hover {
+        background: linear-gradient(135deg, $primary-dark 0%, $primary-color 100%);
+        color: $white;
+        text-decoration: none;
+      }
+    }
+
+    @include respond-to(lg) {
+      padding: $spacing-3 $spacing-6;
+      font-size: $font-size-base;
+    }
+  }
+
+  &__link-icon {
+    font-size: $font-size-lg;
+    line-height: 1;
+
+    @include respond-to(lg) {
+      font-size: $font-size-xl;
+    }
+  }
+
+  &__link-text {
+    @media (max-width: $breakpoint-lg - 1px) {
+      display: none;
+    }
+  }
+
+  &__mobile-toggle {
+    @include button-base;
+    @include flex-center;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    @include respond-to(md) {
+      display: none;
+    }
+  }
+
+  &__hamburger {
+    position: relative;
+    width: 24px;
+    height: 18px;
+
+    span {
+      display: block;
+      position: absolute;
+      height: 2px;
+      width: 100%;
+      background: $gray-700;
+      border-radius: 1px;
+      opacity: 1;
+      left: 0;
+      transform: rotate(0deg);
+      transition: all 0.25s ease-in-out;
+
+      &:nth-child(1) {
+        top: 0px;
+      }
+
+      &:nth-child(2) {
+        top: 8px;
+      }
+
+      &:nth-child(3) {
+        top: 16px;
+      }
+    }
+
+    &--open {
+      span {
+        &:nth-child(1) {
+          top: 8px;
+          transform: rotate(135deg);
+        }
+
+        &:nth-child(2) {
+          opacity: 0;
+          left: -60px;
+        }
+
+        &:nth-child(3) {
+          top: 8px;
+          transform: rotate(-135deg);
+        }
+      }
+    }
+  }
+
+  &__mobile-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: $white;
+    border-bottom: 2px solid $gray-200;
+    box-shadow: $shadow-lg;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all $transition-base;
+    z-index: $z-dropdown;
+
+    &--open {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    @include respond-to(md) {
+      display: none;
+    }
+  }
+
+  &__mobile-link {
+    @include flex-center;
+    gap: $spacing-3;
+    padding: $spacing-4 $spacing-6;
+    text-decoration: none;
+    color: $gray-700;
+    font-weight: $font-weight-medium;
+    font-size: $font-size-base;
+    border-bottom: 1px solid $gray-100;
+    transition: all $transition-base;
+
+    &:hover:not(&--active) {
+      background: $gray-50;
+      color: $gray-800;
+      text-decoration: none;
+    }
+
+    &--active {
+      background: linear-gradient(135deg, $primary-color 0%, $primary-light 100%);
+      color: $white;
+
+      &:hover {
+        background: linear-gradient(135deg, $primary-dark 0%, $primary-color 100%);
+        color: $white;
+        text-decoration: none;
+      }
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__mobile-link-icon {
+    font-size: $font-size-xl;
+    line-height: 1;
+  }
+
+  &__mobile-link-text {
+    flex: 1;
+    text-align: left;
+  }
+
+  &__backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: $z-backdrop;
+
+    @include respond-to(md) {
+      display: none;
+    }
+  }
+
+  // Animation for mobile menu items
+  &__mobile-menu--open &__mobile-link {
+    animation: slideInLeft 0.3s ease-out;
+
+    @for $i from 1 through 4 {
+      &:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.1}s;
+      }
+    }
+  }
+
+  // Focus states for accessibility
+  &__link:focus,
+  &__mobile-link:focus,
+  &__mobile-toggle:focus {
+    outline: 2px solid $primary-color;
+    outline-offset: 2px;
+  }
+
+  // Hover effects for desktop links
+  &__link:not(&__link--active):hover {
+    .navigation__link-icon {
+      transform: scale(1.1);
+    }
+  }
+
+  // Active state indicator
+  &__link--active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 2px;
+    background: $white;
+    border-radius: 1px;
+
+    @include respond-to(lg) {
+      width: 30px;
+    }
+  }
+}
