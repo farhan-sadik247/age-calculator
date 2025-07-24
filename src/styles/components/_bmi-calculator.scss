@@ -235,6 +235,13 @@
   background: linear-gradient(135deg, $white 0%, $gray-50 100%);
   border: 2px solid $gray-200;
 
+  // Dark mode
+  [data-theme="dark"] & {
+    background: linear-gradient(135deg, $dark-surface 0%, $dark-bg 100%);
+    border-color: $dark-border;
+    color: $dark-text;
+  }
+
   &__header {
     text-align: center;
     margin-bottom: $spacing-8;
@@ -248,6 +255,11 @@
 
     @include respond-to(md) {
       font-size: $font-size-3xl;
+    }
+
+    // Dark mode
+    [data-theme="dark"] & {
+      color: $dark-text;
     }
   }
 
@@ -273,6 +285,12 @@
       width: 180px;
       height: 180px;
     }
+
+    // Dark mode
+    [data-theme="dark"] & {
+      background: $dark-surface;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    }
   }
 
   &__number {
@@ -284,6 +302,11 @@
     @include respond-to(md) {
       font-size: $font-size-5xl;
     }
+
+    // Dark mode
+    [data-theme="dark"] & {
+      color: $dark-text;
+    }
   }
 
   &__label {
@@ -294,6 +317,11 @@
 
     @include respond-to(md) {
       font-size: $font-size-lg;
+    }
+
+    // Dark mode
+    [data-theme="dark"] & {
+      color: $dark-text;
     }
   }
 
@@ -352,9 +380,15 @@
     [data-theme="dark"] & {
       background: $dark-surface !important;
       color: $dark-text !important;
+      border-color: $dark-border !important;
 
-      h3, h4, p, li, span {
+      h3, h4, p, li, span, div {
         color: $dark-text !important;
+      }
+
+      // Bullet points in dark mode
+      li::before {
+        color: $primary-color !important;
       }
     }
     border: 1px solid $gray-200;

@@ -231,6 +231,7 @@ body {
 
   // Comprehensive text visibility fixes
   .bmi-calculator,
+  .bmi-result,
   .diet-chart,
   .health-tips {
     // Ensure all text is visible
@@ -244,6 +245,18 @@ body {
     .description,
     .category-option {
       color: $dark-text !important;
+    }
+
+    // BMI Result specific text elements
+    .bmi-result__description,
+    .bmi-result__healthy-range,
+    .bmi-result__recommendations,
+    .bmi-result__risks {
+      color: $dark-text !important;
+
+      h3, h4, p, li, span, div {
+        color: $dark-text !important;
+      }
     }
 
     // Form elements
